@@ -9,6 +9,7 @@ export default function DarkmodeToggle() {
     return (
         <Switch.Group as="div" className="flex items-center">
             <Switch
+                name="dark mode toggle"
                 checked={isDark}
                 onChange={setIsDark}
                 className={clsx(
