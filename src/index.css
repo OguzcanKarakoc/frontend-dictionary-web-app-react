@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "Inter";
+    src: url("./assets/fonts/inter/Inter-VariableFont_slnt_wght.ttf");
+}
+
+@font-face {
+    font-family: "Lora";
+    src: url("./assets/fonts/lora/Lora-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: "Iconsolata";
+    src: url("./assets/fonts/inconsolata/Inconsolata-VariableFont_wdth_wght.ttf");
+}
+
+@font-face {
+    font-family: "Lora";
+    font-style: italic;
+    src: url("./assets/fonts/lora/Lora-Italic-VariableFont_wght.ttf");
+}
