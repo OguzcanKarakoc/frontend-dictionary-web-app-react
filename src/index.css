@@ -22,3 +22,9 @@
     font-style: italic;
     src: url("./assets/fonts/lora/Lora-Italic-VariableFont_wght.ttf");
 }
+
+@layer base {
+    * {
+        @apply transition-all
+    }
+}
