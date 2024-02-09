@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Form } from "react-router-dom";
+import { Form, useSearchParams } from "react-router-dom";
 import SearchInput from "./SearchInput";
 import clsx from "clsx";
 import * as yup from "yup";
@@ -32,16 +32,14 @@ function SearchForm({ onSubmit, onError, className }: SearchFormProps) {
         resolver: yupResolver(schema),
     });
 
-    useEffect(() => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const searchParam = urlParams.get("search");
+    const [searchParams] = useSearchParams();
 
+    useEffect(() => {
+        const searchParam = searchParams.get("search");
         setValue("search", searchParam || "");
 
-        if (searchParam) {
-            onSubmit(searchParam);
-        }
-    }, [setValue, onSubmit]);
+        if (searchParam) onSubmit(searchParam);
+    }, [setValue, onSubmit, searchParams]);
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
         if (e.key === "Enter") {
