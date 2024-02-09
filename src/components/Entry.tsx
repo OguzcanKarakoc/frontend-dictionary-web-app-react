@@ -1,23 +1,29 @@
 import { Entry as ApiEntry } from "../apis/DictionaryApi";
-import PlayIcon from "../assets/images/icon-play.svg?react";
+import PlayButton from "./PlayButton";
 import ExternalLinkIcon from "../assets/images/icon-new-window.svg?react";
-import { Fragment } from "react";
+import { Fragment, useCallback } from "react";
+import { useSearchParams } from "react-router-dom";
 
 interface EntryProps {
     entry: ApiEntry;
 }
 
 function Entry({ entry }: EntryProps) {
-    const handleAudio = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const [, setSearchParams] = useSearchParams();
+
+    const handleAudio = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         const audioUrl = entry.phonetics.find(
             (phonetic) => phonetic.audio,
         )?.audio;
-        console.log(audioUrl);
         if (!audioUrl) return;
 
         const audio = new Audio(audioUrl);
         audio.play();
+    }, [entry.phonetics]);
+
+    const handleSearch = (word: string) => {
+        setSearchParams({ search: word });
     };
 
     return (
@@ -31,9 +37,11 @@ function Entry({ entry }: EntryProps) {
                         {entry.phonetic}
                     </span>
                 </div>
-                <button type="button" title="play audio" onClick={handleAudio}>
-                    <PlayIcon className="h-12 w-12 md:h-20 md:w-20" />
-                </button>
+
+                <PlayButton
+                    onClick={handleAudio}
+                    className="h-12 w-12 md:h-20 md:w-20 "
+                />
             </div>
 
             {entry.meanings.map((meaning, index) => (
@@ -77,7 +85,12 @@ function Entry({ entry }: EntryProps) {
                                 {meaning.synonyms.map(
                                     (synonym, index, array) => (
                                         <Fragment key={index}>
-                                            <span className="font-bold text-medium-purple">
+                                            <span
+                                                onClick={() =>
+                                                    handleSearch(synonym)
+                                                }
+                                                className="font-bold text-medium-purple hover:cursor-pointer hover:underline"
+                                            >
                                                 {synonym}
                                             </span>
                                             {index != array.length - 1 && ", "}
