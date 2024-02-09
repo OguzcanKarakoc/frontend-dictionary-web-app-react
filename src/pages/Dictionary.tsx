@@ -38,7 +38,6 @@ function Dictionary() {
     }, []);
 
     const handleErrors = useCallback(() => {
-        // reset entries after an error from the form
         setEntries(null);
     }, []);
 

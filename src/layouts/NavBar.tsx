@@ -31,19 +31,19 @@ function NavBar({ className }: NavBarProps) {
                                 <ChevronDownIcon className="h-8" />
                             </span>
                         </Listbox.Button>
-                        <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-nav ring-1 ring-black ring-opacity-5 dark:shadow-medium-purple focus:outline-none dark:bg-eerie-black">
+                        <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-nav ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-eerie-black dark:shadow-medium-purple">
                             {fonts.map((font) => (
                                 <Listbox.Option
                                     key={font}
                                     value={font}
                                     as={Fragment}
                                 >
-                                    {({ active }) => (
+                                    {({ active, selected }) => (
                                         <li
                                             className={clsx(
-                                                "relative cursor-default select-none px-3 py-2 hover:cursor-pointer dark:text-white",
+                                                "relative cursor-default select-none px-3 py-2 font-bold hover:cursor-pointer dark:text-white",
                                                 `${
-                                                    active
+                                                    active || selected
                                                         ? "!text-medium-purple"
                                                         : "text-black"
                                                 }`,
